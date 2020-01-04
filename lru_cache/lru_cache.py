@@ -29,7 +29,7 @@ class LRU_Cache(object):
         self.size += 1
     
     def cache_full(self):
-        if self.size == 5:
+        if self.size == self.capacity:
             return True
         return False
     

@@ -54,7 +54,7 @@ class LinkedList:
 
 def union(llist_1, llist_2):
     
-    #create a list of both linked lists 
+    #create a joined array of both linked lists 
     duplicated_union = llist_1.to_list() + llist_2.to_list()
     
     non_duplicated = []
@@ -66,7 +66,7 @@ def union(llist_1, llist_2):
 
 def intersection(llist_1, llist_2):
     
-    #create a list of both linked lists 
+    # convert both linked lists to arrays 
     list_1 = llist_1.to_list()
     list_2 = llist_2.to_list()
     
@@ -116,6 +116,8 @@ def test_intersection(llist_1, llist_2):
 
 
 def test_union_and_intersection():
+
+    """ function to test the intersection and union functions """
     
     x = [3,2,4,35,6,65,6,4,3,21]
     y = [6,32,4,9,6,1,11,21,1]
