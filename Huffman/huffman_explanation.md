@@ -1,14 +1,23 @@
-there are quite a few parts to the huffman encoding implementation class
+## Design:
 
-- initial frequency counter - I lent on pythons optimised collections counter there are a few linear loops within this functions, one loop through the input string, one to sum the values, one normalise and one to return a list of tuples, this function has a time complexity of 0(n)
-
-- build tree - all the letters are pushed onto the tree, 0(n), the heapq library has done most of the heavy lifting in this function a tree is built as an array/python list, values are pushed onto the heap lowest 2 popped off and joined in a node this is again done in linear time 
-
-- build code mappings - this is done using a recursive tree walking helper function and a hashing function in linear time
-
-- encode - values are joined in a string in linear time 
-
-- decode - this is done using iteration however potnetially this maybe could have been done recursively th tree is simply walked checking if it is a leaf node and getting the label else moving down the tree, letters are then jined into a string all operations done in linear time 
+the huffman coder is comprised of a few peices, the bulk of the work is done in the frequency counter and build tree functions, where heaps arrays and hashmaps are used as the data structures. the heap was chosen because it naturally places lower values down the tree and nested arrays nicely represent a tree structure, naturally a hash map was chosen to hold the mappings of letters to codes
 
 
-the space complexity of the huffman tree is proportional to input and the worst time complexity out of the helpers is also linear
+
+## Time Complexity
+* Encoding:
+huffman frequency counter - 3 iterative loops + an interative sum loop over the input string mean this function is 0(n) linearly correlated with input size
+
+build tree - heaps are linearithmic time O(n log n)
+
+encode - is at its worst a recursive function using the helper walk tree to recurse over the structure to add 0's and 1's accordingly, this is a tree and therfore the time complexity O(2^n) which dominates and is the time complexity of the function
+
+* Decoding:
+the decode function builds trees and encodes the message which if considered in this case will cause the function to be O(2^n) dominated again by the heap tree building as the decoding itself will be in 0(n) linear time as it is a walk through the encoded message once while appending to an array
+
+## Space Complexity
+* Encoding:
+the space complexity of the encoding is only O(n) as the recursive stack will only ever get as big as n
+
+* Decoding:
+the same is true for decode, the iterative loop through the tree is linearly correlated with the input

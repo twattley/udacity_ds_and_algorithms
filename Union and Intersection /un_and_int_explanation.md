@@ -1,5 +1,13 @@
-to solve both these problems the linked list of converted to an array for manipulation
+## Design:
+the union and intersection functions have been implemented using a combination of arrays and sets, array conversion was chosen for ease of manipulation and sets have been used to remove duplicates
 
-the worst time complexity for these is linear time, 2 linked lists are traversed adding to python list objects, this are then walked through appended to pythoin lists depending on the conditions of the fucntions
 
-space conditions are also in proportion to input
+## Time Complexity
+* union:
+union uses the helper function to list, this iterates through the linked list and returns a list in linear proportion to the input, a further 2 more loops of the input are done in linear fashion meaning this function overall is 0(n)
+
+* intersection:
+intersection is quadratic as there is a loop over one list for containment in another and this dominated the other loops 
+
+## Space Complexity
+space is a linear concern 0(n) as it will grow depending on the size linked lists specified

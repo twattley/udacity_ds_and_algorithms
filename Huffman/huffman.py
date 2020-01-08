@@ -9,6 +9,7 @@ class HuffmanTree:
     
     def __init__(self, input_string):
         self.input_string = input_string
+        self.single_letter_case = False
     
     @staticmethod
     def traverse_tree(tree, mapper, prefix):
@@ -94,7 +95,16 @@ class HuffmanTree:
         
         #build code tree
         tree = self.build_tree()
-        HuffmanTree.traverse_tree(tree, codemap, '')
+        
+        #case where there is one leaf
+        if len(tree) == 1:
+            value, key = tree[0]
+            codemap[key] = str(int(value))
+            
+            #set state
+            self.single_letter_case = True
+        else:
+            HuffmanTree.traverse_tree(tree, codemap, '')
         
         return codemap
         
@@ -119,18 +129,25 @@ class HuffmanTree:
         
         encoded_message = self.encode()
         
-        decoded_letters = []
-        for digit in encoded_message:
-            if digit == '0': 
-                traverser = traverser[1]
-            else: 
-                traverser = traverser[2]
-           
-            if len(traverser) == 1:   #check if at leaf/bottom of tree
+        if self.single_letter_case:
+            decoded_letters = []
+            for digit in encoded_message:
                 _ , label = traverser[0]
                 decoded_letters.append(label)
-                traverser = tree
             
+        else:
+            decoded_letters = []
+            for digit in encoded_message:
+                if digit == '0': 
+                    traverser = traverser[1]
+                else: 
+                    traverser = traverser[2]
+
+                if len(traverser) == 1:   #check if at leaf/bottom of tree
+                    _ , label = traverser[0]
+                    decoded_letters.append(label)
+                    traverser = tree
+
         decoded_string = ''.join(decoded_letters)
         
         return decoded_string
@@ -149,12 +166,15 @@ class TestStringMethods(unittest.TestCase):
         with self.assertRaises(ValueError):
             HuffmanTree('').encode()
     
-    def test_correct_input(self):
+    def test_huffman(self):
         input_str = 'aaaccccbcbabdaba'
         huffman = HuffmanTree(input_str)
-        self.assertTrue(huffman.encode() == '0001111111110111101010110001010')
-        self.assertTrue(huffman.build_code_mappings() == {'a': '0', 'd': '100', 'b': '101', 'c': '11'})
-        self.assertTrue(huffman.decode() == input_str)
+        assert sys.getsizeof(input_str) > sys.getsizeof(int(huffman.encode()))
+        
+    def test_single_case(self):
+        input_str = 'aaaaaaa'
+        huffman = HuffmanTree(input_str)
+        assert sys.getsizeof(input_str) > sys.getsizeof(int(huffman.encode()))
         
 #run tests
 unittest.main(argv=['first-arg-is-ignored'], exit=False)

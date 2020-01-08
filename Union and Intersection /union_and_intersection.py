@@ -1,3 +1,5 @@
+import unittest
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -52,36 +54,47 @@ class LinkedList:
 
 
 
+
 def union(llist_1, llist_2):
     
-    #create a joined array of both linked lists 
-    duplicated_union = llist_1.to_list() + llist_2.to_list()
+    if not llist_1:
+        raise ValueError ('list 1 empty, must contain a value')
     
-    non_duplicated = []
-    for i in duplicated_union:
-        if i not in non_duplicated:
-            non_duplicated.append(i)
-    return non_duplicated
+    if not llist_2:
+        raise ValueError ('list 2 empty, must contain a value')
+        
+    list_1 = llist_1.to_list()
+    list_2 = llist_2.to_list()
+    
+    non_duplicated = set(list_1 + list_2)
+    
+    union_linked_list = LinkedList()
+    
+    for item in non_duplicated:
+        union_linked_list.append(item)
+
+    return union_linked_list
 
 
 def intersection(llist_1, llist_2):
     
+    if not llist_1:
+        raise ValueError ('list 1 empty, must contain a value')
+    
+    if not llist_2:
+        raise ValueError ('list 2 empty, must contain a value')
+        
     # convert both linked lists to arrays 
-    list_1 = llist_1.to_list()
-    list_2 = llist_2.to_list()
+    set_1 = set(llist_1.to_list())
+    set_2 = set(llist_2.to_list())
+
+    intersection = LinkedList()
     
-    intersection = []
-    
-    for i in list_1:
-        if i in list_2:
+    for i in set_1:
+        if i in set_2:
             intersection.append(i)
             
-    unique_intersection = []
-    for i in intersection:
-        if i not in unique_intersection:
-            unique_intersection.append(i)
-            
-    return unique_intersection
+    return intersection
             
 
 def create_linked_lists(list_1, list_2):
@@ -142,3 +155,19 @@ def test_union_and_intersection():
     assert sorted(test_intersection(llist_1, llist_2)) == sorted(intersection(llist_1, llist_2))
     
 test_union_and_intersection()   
+
+class TestUnionIntersection(unittest.TestCase):
+    
+    """ test edge cases raise error """
+    
+
+    def test_input_error_1(self):
+        with self.assertRaises(ValueError):
+            union('',[1,2,3,4])
+    
+    def test_input_error_2(self):
+        with self.assertRaises(ValueError):
+            intersection('',[1,2,3,4])
+    
+#run tests
+unittest.main(argv=['first-arg-is-ignored'], exit=False)

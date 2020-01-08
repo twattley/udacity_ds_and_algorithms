@@ -1,5 +1,13 @@
-a hash map in the form of a python dictionary has been used as the data structure for the lru cache, some of the heavy lifting has been done by python since they introduced insertion order post 3.7 the most recently used/inserted item is at the tail of the dictionary,  thus meaning operations of get and set are done in constant time.
 
-size is tracked by object state and I have simply unpacked the first element of the tuple and popped it out of the dictionary if it is full
+## Design:
+the lru cache has been implemented via a combination of a hash map and a linked list the key being that given and the value being a node with previous and next attributes, these structures have been chosen to for optimal get and set methods in the class
 
-space is a linear concern as it will grow depending on the size of the cache specified
+## Time Complexity
+* set_val:
+set val runs in 0(1) constant time this is done by simply adding a node and adjusting the pointers accordingly 
+
+* get:
+get uses a python dictionary to lookup the node and again is therefore a 0(1) constant time operation
+
+## Space Complexity
+space is a linear concern 0(n) as it will grow depending on the size of the cache specified
