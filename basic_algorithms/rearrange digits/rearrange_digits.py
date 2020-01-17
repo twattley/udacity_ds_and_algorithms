@@ -34,7 +34,7 @@ def reverse_merge(left, right):
 
 def rearrange_digits(input_list):
         
-    sorted_list = mergesort(input_list)
+    sorted_list = reverse_mergesort(input_list)
     
     first_num = int(''.join(str(v) for i,v in enumerate(sorted_list) if not i%2)) 
     second_num = int(''.join(str(v) for i,v in enumerate(sorted_list) if i%2))

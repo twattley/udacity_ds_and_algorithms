@@ -56,9 +56,9 @@ class TestSort012(unittest.TestCase):
             sort_012('')
             
     def test_correct_input(self):
-        assert sort_012(list_a) == sorted(list_a)
-        assert sort_012(list_b) == sorted(list_b)
-        assert sort_012(list_c) == sorted(list_c)
+        assert sort_012(LIST_A) == sorted(LIST_A)
+        assert sort_012(LIST_B) == sorted(LIST_B)
+        assert sort_012(LIST_C) == sorted(LIST_C)
     
 #run tests
 unittest.main(argv=['first-arg-is-ignored'], exit=False)

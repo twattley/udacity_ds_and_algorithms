@@ -16,8 +16,8 @@ class TrieNode:
         words = []
         for letter, child in self.children.items():
             if child.is_word:
-                words.append(suffix + letter)
-            words += child.suffixes(suffix + letter)
+                words.append(suffix+letter)
+            words += child.suffixes(suffix+letter)
         return words
 
 
