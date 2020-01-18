@@ -1,9 +1,6 @@
 import unittest
 import random
 
-TEST_LIST_1 = [random.randrange(0, 100, 1) for i in range(20)]
-TEST_LIST_2 = [random.randrange(0, 100, 1) for i in range(20)]
-TEST_LIST_3 = [random.randrange(0, 100, 1) for i in range(20)]
 
 def get_min_max(ints):
     """
@@ -34,6 +31,12 @@ def get_min_max(ints):
 
     return min_num, max_num
 
+
+
+
+TEST_LIST_1 = [random.randrange(0, 100, 1) for i in range(20)]
+TEST_LIST_2 = [random.randrange(0, 100, 1) for i in range(20)]
+TEST_LIST_3 = [random.randrange(0, 100, 1) for i in range(20)]
 
 
 class TestMinMax(unittest.TestCase):

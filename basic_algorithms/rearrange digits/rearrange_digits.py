@@ -1,3 +1,5 @@
+import unittest
+
 def reverse_mergesort(items):
 
     if len(items) <= 1:
@@ -33,6 +35,12 @@ def reverse_merge(left, right):
     return merged
 
 def rearrange_digits(input_list):
+    
+    if not isinstance(input_list, list):
+        raise TypeError('input to rearrange digits must be a list')
+
+    if not len(input_list) >= 2:
+        raise AttributeError('list must be greater than 2 to split and re-arrange')
         
     sorted_list = reverse_mergesort(input_list)
     
@@ -41,15 +49,25 @@ def rearrange_digits(input_list):
     
     return [first_num, second_num]
     
+
+INPUT_LIST_1, EXPECTED_OUTPUT_1 = ([[1, 2, 3, 4, 5], [531, 42]])
+INPUT_LIST_2, EXPECTED_OUTPUT_2 = ([[4, 6, 2, 5, 9, 8], [964, 852]])
+
+class TestStringMethods(unittest.TestCase):
     
+    """ test cases for huffman encoder """
 
-def test_function(test_case):
-    output = rearrange_digits(test_case[0])
-    solution = test_case[1]
-    if sum(output) == sum(solution):
-        print("Pass")
-    else:
-        print("Fail")
-
-test_function([[1, 2, 3, 4, 5], [542, 31]])
-test_case = [[4, 6, 2, 5, 9, 8], [964, 852]]
+    def test_input_error_1(self):
+        with self.assertRaises(TypeError):
+            rearrange_digits(1)
+            
+    def test_input_error_3(self):
+        with self.assertRaises(AttributeError):
+            rearrange_digits([2])
+    
+    def test_rearrange_digits(self):
+        assert rearrange_digits(INPUT_LIST_1) == EXPECTED_OUTPUT_1
+        assert rearrange_digits(INPUT_LIST_2) == EXPECTED_OUTPUT_2
+    
+#run tests
+unittest.main(argv=['first-arg-is-ignored'], exit=False)

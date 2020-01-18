@@ -37,6 +37,8 @@ class Trie:
 
     def find(self, prefix):
         ## Find the Trie node that represents this prefix
+        if prefix not in trie_node.children:
+            return False
         trie_node = self.root
         for letter in prefix:
             trie_node = trie_node.children[letter]

@@ -8,4 +8,4 @@ being binary search the problem will have a time complexity of 0(log n) as the i
 
 Space complexity:
 
-space is 0(n * log n) the initial range from 1 through to the integer, this will be cut in half with every operation so the auxillary space is 0(log n)
+space for this algorithm is the variables pointing to start, end, middle and square root, these are constant throughout and therefore 0(1) in memory

@@ -1,11 +1,16 @@
 Design:
 
-I had originally considered using a dictionary or class to keep track of insertion states however the sort 012 has been implemented by instantiating 3 lists and appending to the correct list, the lists then simply need concatenating together into one in the correct order
+the implementation of the sorting012 algorithm is done by using the index pointers in an array, originally 3 variables are set, 
+- one where the last 0 is found this is set to 0, 
+- one where the first 2 is found this is originally set to the last index in the list 
+- an iterating pointer to be incremented in the while loop
+
+when traversing the list if a 0 or 2 is found that a reverse operation is performed, the 0 or 2 being inserted wherever their variable indexes are pointing to and the index nudged up for 0's down for 2's one is the pivot in 012 and is left alone
 
 Time complexity:
 
-one traversal of the list to sort so linear time 0(n) having to go through every item and then 2 list concatenations in constant time 0(1) giving an overall time complexity of 0(n)
+one traversal of the list values are changed in place so to sort linear time 0(n) 
 
 Space complexity:
 
-for space there is the original list input size which is 0(n) and there is auxillary space for the 3 input lists but they are guarranteed not to grow any larger than the input list so again 0(n)
+space complexity id the size of the list + 3 index variables so this is list 0(n) + 3 variables 0(1) the linear part od this dominating giving overall space complexity of O(n) growing linearly with size of input in the worst case

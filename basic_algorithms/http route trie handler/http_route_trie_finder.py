@@ -72,7 +72,7 @@ class Router:
         
 
 # create the router and add a route
-ROUTER = Router("root handler", "not found handler") # remove the 'not found handler' if you did not implement this
+ROUTER = Router("root handler", "not found handler") 
 
 handlers = [
     

@@ -1,3 +1,5 @@
+import unittest
+
 def rotated_array_search(input_list, number):
     """
     Find the index by searching in a rotated sorted array
@@ -43,17 +45,41 @@ def linear_search(input_list, number):
             return index
     return -1
 
-def test_function(test_case):
-    input_list = test_case[0]
-    number = test_case[1]
-    if linear_search(input_list, number) == rotated_array_search(input_list, number):
-        print("Pass")
-    else:
-        print("Fail")
+INPUT_LIST_1, EXPECTED_OUTPUT_1 = ([[6, 7, 8, 9, 10, 1, 2, 3, 4], 6])
+INPUT_LIST_2, EXPECTED_OUTPUT_2 = ([[6, 7, 8, 9, 10, 1, 2, 3, 4], 1])
+INPUT_LIST_3, EXPECTED_OUTPUT_3 = ([[6, 7, 8, 1, 2, 3, 4], 8])
+INPUT_LIST_4, EXPECTED_OUTPUT_4 = ([[6, 7, 8, 1, 2, 3, 4], 1])
+INPUT_LIST_5, EXPECTED_OUTPUT_5 = ([[6, 7, 8, 1, 2, 3, 4], 10])
 
-test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 6])
-test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 1])
-test_function([[6, 7, 8, 1, 2, 3, 4], 8])
-test_function([[6, 7, 8, 1, 2, 3, 4], 1])
-test_function([[6, 7, 8, 1, 2, 3, 4], 10])
 
+class TestStringMethods(unittest.TestCase):
+    
+    """ test cases for huffman encoder """
+
+    def test_input_error_1(self):
+        with self.assertRaises(TypeError):
+            rotated_array_search([6, 7, 8, 9, 10, 1, 2, 3, 4],'some_string')
+    
+    def test_input_error_2(self):
+        with self.assertRaises(TypeError):
+            rotated_array_search('some_string', 5)
+    
+    def test_rotated_array_search(self):
+        assert linear_search(
+                    INPUT_LIST_1, EXPECTED_OUTPUT_1) == rotated_array_search(
+                                                            INPUT_LIST_1, EXPECTED_OUTPUT_1)
+        assert linear_search(
+                    INPUT_LIST_2, EXPECTED_OUTPUT_2) == rotated_array_search(
+                                                            INPUT_LIST_2, EXPECTED_OUTPUT_2)
+        assert linear_search(
+                    INPUT_LIST_3, EXPECTED_OUTPUT_3) == rotated_array_search(
+                                                            INPUT_LIST_3, EXPECTED_OUTPUT_3)
+        assert linear_search(
+                    INPUT_LIST_4, EXPECTED_OUTPUT_4) == rotated_array_search(
+                                                            INPUT_LIST_4, EXPECTED_OUTPUT_4)
+        assert linear_search(
+                    INPUT_LIST_5, EXPECTED_OUTPUT_5) == rotated_array_search(
+                                                            INPUT_LIST_5, EXPECTED_OUTPUT_5)
+        
+#run tests
+unittest.main(argv=['first-arg-is-ignored'], exit=False)

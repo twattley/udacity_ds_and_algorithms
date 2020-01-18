@@ -9,4 +9,4 @@ being binary search this is implemented in log(n) time every pass through the ar
 
 space complexity:
 
-space complexity for the search is 0(1) there will always be 1 item being passed to look for this is constant 
+space complexity for the search is 0(n) the input space will grow in lionear proportion to the size of the memory allocated for the list, the auxiallry space used to continually cut the list in half will be 0(log n) therefore total complexity will O(n + logn)

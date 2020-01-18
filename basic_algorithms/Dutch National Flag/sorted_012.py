@@ -1,56 +1,44 @@
-import random
 import unittest
 
-#generate some dummy test data
-LIST_A = [random.randrange(0, 3, 1) for i in range(20)]
-LIST_B = [random.randrange(0, 3, 1) for i in range(20)]
-LIST_C = [random.randrange(0, 3, 1) for i in range(20)]
-
-
 def sort_012(input_list):
-    """
-    Given an input array consisting on only 0, 1, and 2, sort the array in a single traversal.
-
-    Args:
-       input_list(list): List to be sorted
-    """
-    zeros = []
-    ones = []
-    twos = []
     
     if not input_list:
         raise ValueError('no list input!!')
     
-    for i in input_list:
-        
-        if not isinstance (i, int):
-            raise TypeError('Input to sort_012 function must be an integer')
-        
-        if i == 0:
-            zeros.append(i)
-        elif i == 1:
-            ones.append(i)
-        elif i == 2:
-            twos.append(i)
-        else:
-            raise ValueError('Input to sort_012 function must be between 1 and 2')
-            
-    return zeros + ones + twos
-        
+    last_0 = 0                   #pointer to last 0 index
+    first_2 = len(input_list)- 1 #pointer to first 2 index
+    index = 0                    #index counter 
+    
+    while index <= first_2:
 
+        #case where index is 0
+        if input_list[index] == 0:
+            input_list[index] = input_list[last_0] #reverse positions
+            input_list[last_0] = 0 
+            last_0 += 1
+            index += 1
+            
+        #case where index is 2    
+        elif input_list[index] == 2:
+            input_list[index] = input_list[first_2] #reverse positions
+            input_list[first_2] = 2
+            first_2 -= 1
+            
+        #case where index is 1 leave 
+        else:
+            index += 1 
+    
+    return input_list
+        
+#generate some dummy test data
+LIST_A = [2, 2, 0, 1, 1, 0, 0, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 1, 0, 0]
+LIST_B = [0, 1, 2, 1, 0, 0, 2, 2, 1, 1, 1, 1, 2, 2, 0, 0, 2, 2, 0, 0]
+LIST_C = [2, 0, 2, 2, 1, 1, 1, 2, 1, 0, 2, 2, 1, 1, 1, 0, 0, 0, 2, 2]
 
 class TestSort012(unittest.TestCase):
     
     """ test sort 012 function """
 
-    def test_type_error(self):
-        with self.assertRaises(TypeError):
-            sort_012([1, 2, 0, 2, 1, 0, 0, 2, 'string', 1, 2, 0, 0, 2, 2, 1, 1, 1, 2, 2])
-    
-    def test_value_error(self):
-        with self.assertRaises(ValueError):
-            sort_012([1, 2, 0, 2, 1, 0, 0, 2, 0, 1, 3, 0, 0, 2, 2, 1, 1, 1, 2, 2])
-            
     def test_no_input_error(self):
         with self.assertRaises(ValueError):
             sort_012('')
