@@ -9,6 +9,10 @@ def get_min_max(ints):
     Args:
        ints(list): list of integers containing one or more integers
     """
+    
+    if len(ints) ==1:
+        raise ValueError('min max must be called with at least 2 arguments')
+    
     if not ints:
         raise AttributeError('get_min_max function must be called with value')
     
@@ -42,6 +46,10 @@ TEST_LIST_3 = [random.randrange(0, 100, 1) for i in range(20)]
 class TestMinMax(unittest.TestCase):
     
     """ test cases for min max function """
+    
+    def test_value_error(self):
+        with self.assertRaises(ValueError):
+            get_min_max([5])
 
     def test_list_error(self):
         with self.assertRaises(TypeError):

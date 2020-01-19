@@ -43,9 +43,11 @@ def rearrange_digits(input_list):
         raise AttributeError('list must be greater than 2 to split and re-arrange')
         
     sorted_list = reverse_mergesort(input_list)
-    
-    first_num = int(''.join(str(v) for i,v in enumerate(sorted_list) if not i%2)) 
-    second_num = int(''.join(str(v) for i,v in enumerate(sorted_list) if i%2))
+    try:
+        first_num = int(''.join(str(v) for i,v in enumerate(sorted_list) if not i%2)) 
+        second_num = int(''.join(str(v) for i,v in enumerate(sorted_list) if i%2))
+    except ValueError:
+        raise TypeError('list must contain all integer values')
     
     return [first_num, second_num]
     
@@ -53,17 +55,25 @@ def rearrange_digits(input_list):
 INPUT_LIST_1, EXPECTED_OUTPUT_1 = ([[1, 2, 3, 4, 5], [531, 42]])
 INPUT_LIST_2, EXPECTED_OUTPUT_2 = ([[4, 6, 2, 5, 9, 8], [964, 852]])
 
-class TestStringMethods(unittest.TestCase):
+class TestRearrangeDigits(unittest.TestCase):
     
-    """ test cases for huffman encoder """
+    """ test cases for re-arrange digits """
 
     def test_input_error_1(self):
         with self.assertRaises(TypeError):
             rearrange_digits(1)
+    
+    def test_input_error_2(self):
+        with self.assertRaises(TypeError):
+            rearrange_digits([1.0,2,3,4])
             
     def test_input_error_3(self):
         with self.assertRaises(AttributeError):
             rearrange_digits([2])
+            
+    def test_input_error_4(self):
+        with self.assertRaises(TypeError):
+            rearrange_digits('')
     
     def test_rearrange_digits(self):
         assert rearrange_digits(INPUT_LIST_1) == EXPECTED_OUTPUT_1
