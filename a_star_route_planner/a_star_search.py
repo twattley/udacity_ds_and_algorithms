@@ -42,7 +42,7 @@ def shortest_path(_map, start, goal):
     return path
 
 
-def point_distance(point_a: List, point_b: List) -> int:
+def point_distance(point_a, point_b) -> int:
 
     """ heuristic helper, direct distance between points """
 
